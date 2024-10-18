@@ -35,8 +35,8 @@ export const Characters = () =>{
                             <li className="list-group-item border-0 pb-0 mb-4">Eye-Color: {character.eye_color}</li>
                         </ul>
                         <div className="card-body d-flex justify-content-between">                    
-                        <div className="btn text-primary" onClick={() => handleCardClick(index)}  style={{ border: '2px solid #0d6efd' }}>Learn more!</div>                     
-                        <div className="btn text-primary" onClick={()=> actions.handleLike(character)} style={{ border: '2px solid FDF44D'}}><i className="fa-solid fa-heart"></i><p>{character.likes}</p></div>
+                        <div className="btn text-primary" onClick={() => handleCardClick(index)}  style={{ border: '2px solid #0d6efd', height:'2.5rem', }}>Learn more!</div>                     
+                        <div className="btn text-primary" onClick={()=> actions.handleLike(character)} style={{ border: '2px solid #f7d344', height:'2.5rem', }}><i class="fa-solid fa-heart"></i><p>{character.likes}</p></div>
                          </div>
                     </div>
                         </div>
@@ -76,9 +76,9 @@ export const Planets = () =>{
                             <li className="list-group-item border-0 pb-0 text-wrap">Population: {planet.population}</li>
                             <li className="list-group-item border-0 pb-0 text-wrap">Terrain: {planet.terrain}</li>
                         </ul>
-                        <div className="card-body d-flex justify-content-between" style={{ }}>
+                        <div className="card-body" style={{ }}>
                             <div className="btn text-primary" onClick={()=>handlePlanetClick(index)} style={{ border: '2px solid #0d6efd', height: '50px', width: '140px' }}>Learn more!</div>
-                            <div className="btn text-primary" style={{ border: '2px solid FDF44D'}}><i className="fa-solid fa-heart"></i></div>
+                            <div className="btn text-primary" style={{ border: '2px solid #f7d344', height:'2.5rem', }}><i class="fa-solid fa-heart"></i></div>
                          </div>
                     </div>
                         </div>

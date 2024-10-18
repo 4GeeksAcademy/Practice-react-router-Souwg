@@ -5,6 +5,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			planets: [],
 			likesCounter: 0,
+			likedCharacters: [],
+
 			/*demo: [
 				{
 					title: "FIRST",
@@ -47,6 +49,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 				}
 			},
+
+			removeLike: (characterName) => {
+				const store = getStore();
+				const updatedCharacters = store.likedCharacters.filter(
+					character => character.name !== characterName
+				);
+				setStore({ 
+					likedCharacters: updatedCharacters, 
+					likesCounter: store.likesCounter - 1
+				});
+			},
+			
 
 			addCharacterImages: async () => {
                 const store = getStore();
