@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -10,6 +9,7 @@ export const DescriptionPlanets = () =>{
     const Navigate = useNavigate()
 
     const planet = store.planets[id]
+	
 
     if(!planet) {
 		return <p>Planeta no encontrado...</p>;

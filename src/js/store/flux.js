@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			apiUrl: 'https://swapi.dev/api/',
 			characters: [],
 			planets: [],
+			vehicles: [],
 			likesCounter: 0,
 			likedCharacters: [],
 
@@ -38,17 +39,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			handleLike: (character) => {
+			handleLike: (entity, type) => {
 				const store = getStore();
-				const alreadyLiked = store.likedCharacters.find(c => c.name === character.name);
+				const alreadyLiked = store.likedCharacters.find(
+					(item) => item.name === entity.name && item.type === type
+				);			
 				if (!alreadyLiked) {
 					setStore({
 						...store,
-						likedCharacters: [...store.likedCharacters, character],
-						likesCounter: store.likesCounter + 1
+						likedCharacters: [
+							...store.likedCharacters,
+							{ ...entity, type: type }
+						],
+						likesCounter: store.likesCounter + 1,
 					});
 				}
 			},
+			
+			
 
 			removeLike: (characterName) => {
 				const store = getStore();
@@ -102,6 +110,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 						};
 					});
 					setStore({ planets: planetsImages });
+				}
+			},
+
+			getVehicles: async () => { 
+				const { apiUrl } = getStore();
+				const response = await fetch(`${apiUrl}/vehicles`);
+				const data = await response.json();
+			
+				if (response.ok) {
+					const actions = getActions();
+					const vehiclesWithIds = data.results.map((vehicle) => {
+						const id = vehicle.url.match(/\/(\d+)\/$/)[1];
+						return { ...vehicle, id };
+					});
+					setStore({ vehicles: vehiclesWithIds });
+					actions.addVehiclesImages();
+				} else {
+					setStore({ vehicles: false });
+				}
+			},
+			
+			addVehiclesImages: () => {
+				const store = getStore();
+				const vehicles = store.vehicles;
+			
+				if (vehicles.length > 0) {
+					const vehiclesWithImages = vehicles.map((vehicle) => ({
+						...vehicle,
+						vehicleUrl: `https://starwars-visualguide.com/assets/img/vehicles/${vehicle.id}.jpg`,
+					}));
+					setStore({ vehicles: vehiclesWithImages });
 				}
 			},
 			
