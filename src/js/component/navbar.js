@@ -12,7 +12,7 @@ export const Navbar = () => {
   };
 
   const handleDelete = (e, name) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     actions.removeLike(name);
   };
 
@@ -25,14 +25,43 @@ export const Navbar = () => {
           </Link>
           <div className="ml-auto">
             <div className={`dropdown ${isDropdownOpen ? "show" : ""}`}>
-              <button
-                className="btn btn-primary dropdown-toggle btn-lg"
-                type="button"
-                onClick={toggleDropdown} 
-                aria-expanded={isDropdownOpen}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                Favorites {store.likedCharacters.length}
-              </button>
+                <button
+                  className="col btn btn-primary dropdown-toggle btn-lg"
+                  style={{
+                    width: "9rem",
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    fontSize: "18px",
+                  }}
+                  type="button"
+                  onClick={toggleDropdown}
+                  aria-expanded={isDropdownOpen}
+                >
+                  <span>Favorites</span>
+                  <div
+                    style={{
+                      background: "#666",
+                      color: "white",
+                      width: "30px",
+                      height: "30px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {store.likedCharacters.length}
+                  </div>
+                </button>
+              </div>
               <ul
                 className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}
                 aria-labelledby="dropdownMenuButton"
@@ -49,7 +78,7 @@ export const Navbar = () => {
                         className="btn btn-sm ms-2"
                         onClick={(e) => handleDelete(e, character.name)}
                       >
-                        <i className="fa-solid fa-trash"></i>
+                        <i className="fa-solid fa-trash text-dark border-0"></i>
                       </button>
                     </li>
                   ))
